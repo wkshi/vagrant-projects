@@ -1,0 +1,44 @@
+# Create an OSEv3 group that contains the masters, nodes, and etcd groups
+[OSEv3:children]
+masters
+nodes
+etcd
+
+# Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+# SSH user, this user should allow ssh based auth without requiring a password
+ansible_ssh_user=root
+
+# If ansible_ssh_user is not root, ansible_become must be set to true
+#ansible_become=true
+
+openshift_deployment_type=origin
+deployment_type=origin
+openshift_release="3.11"
+
+# oreg_url=registry.redhat.io/openshift3/ose-${component}:${version}
+# oreg_auth_user="<user>"
+# oreg_auth_password="<password>"
+
+openshift_master_default_subdomain=apps.okd.vm
+
+openshift_cluster_monitoring_operator_install=false
+openshift_disable_check=memory_availability,disk_availability,docker_image_availability
+
+# uncomment the following to enable htpasswd authentication; defaults to AllowAllPasswordIdentityProvider
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+openshift_master_htpasswd_users={'user1': '$apr1$a2nsxr6w$aCymt6HmfCECp7BKIdN181', 'user2': '$apr1$ysonc135$Mi3eAUiKLygwBZNokVnK71'}
+
+# host group for masters
+[masters]
+master.okd.vm openshift_public_ip=192.168.56.100
+
+# host group for etcd
+[etcd]
+master.okd.vm etcd_ip=192.168.56.100
+
+# host group for nodes, includes region info
+[nodes]
+master.okd.vm openshift_public_ip=192.168.56.100 openshift_node_group_name='node-config-master-infra'
+node1.okd.vm openshift_public_ip=192.168.56.101 openshift_node_group_name='node-config-compute'
+node2.okd.vm openshift_public_ip=192.168.56.102 openshift_node_group_name='node-config-compute'
