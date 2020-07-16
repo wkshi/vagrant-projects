@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export HTTP_PROXY=<Your http proxy server>
+export HTTPS_PROXY=<Your https proxy server>
+export SSH_PUBLIC_KEYS=$(cat << EOF
+<Your ssh id_rsa public key>
+EOF
+)

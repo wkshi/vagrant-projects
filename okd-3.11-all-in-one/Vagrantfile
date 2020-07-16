@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "centos/7"
+
+  # Memory for the VMs
+  OKD_MEMORY = 10240
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  config.vm.provider "libvirt" do |v|
+      v.memory = OKD_MEMORY
+      v.cpu_mode = "host-passthrough"
+  end
+
+  # Mount ~/.ssh for provision.sh
+  config.vm.synced_folder "~/.ssh/", "/.ssh",
+    mount_options: ["ro"]
+
+  config.vm.define "dev"
+  config.vm.hostname = "dev.okd.vm"
+  config.vm.network "private_network", ip: "192.168.56.110", libvirt__dhcp_enabled: false
+
+  # Execute customer_provision.sh
+  config.vm.provision "shell", path: "scripts/provision.sh"
+end
