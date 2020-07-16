@@ -24,6 +24,7 @@ EOF
 ```bash
 time vagrant up
 ```
+6. Visit `http://jenkins.okd.vm:8080`
 
 ## Configuration
 - Destroy vagrant instances
