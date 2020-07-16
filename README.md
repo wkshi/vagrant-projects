@@ -4,8 +4,20 @@ A collection of Vagrant projects that provision CentOS and other software automa
 ## Prerequisites
 All projects in this repository require Vagrant and libvirt/KVM with the vagrant-libvirt plugin.
 
-### If using libvirt/KVM
-- Read doc for instructions on using the Vagrant libvirt provider
+### If using libvirt/KVM in Fedora
+- Install libvirt related packages
+```bash
+sudo dnf install virt-manager qemu-kvm qemu-img libvirt-daemon libvirt-daemon-driver*
+sudo usermode -aG libvirt <YOUR USERNAME>
+sudo systemctl restart libvirtd
+sudo systemctl status libvirtd
+```
+- Install `vagrant` and `vagrant-libvirt` plugin
+```bash
+sudo dnf install vagrant
+sudo dnf remove vagrant-libvirt rubygem-fog-core
+vagrant plugin install vagrant-libvirt
+```
 
 ## Getting started
 1. Clone this repository `git clone https://github.com/wkshi/vagrant-projects.git`
