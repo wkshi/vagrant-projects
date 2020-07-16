@@ -26,14 +26,14 @@ time vagrant up
 ```
 6. Within the `dev.okd.vm`, execute installation as `root` user:
 ```bash
-ssh root@master.okd.vm
+ssh root@dev.okd.vm
 oc cluster up --public-hostname=dev.okd.vm
 ```
 
 ## Configuration
 - Uninstall cluster
 ```bash
-ssh root@master.okd.vm
+ssh root@dev.okd.vm
 oc cluster down
 ```
 - Destroy vagrant instances
