@@ -1,10 +1,6 @@
 # Vagrantfile to setup OKD 3.11 Cluster on CentOS 7
 This Vagrantfile will provision a OKD 3.11 cluster with one master and 2 nodes.
 
-## Prerequisites
-1. Install [libvirt/KVM]()
-2. Install [Vagrant](https://vagrantup.com/)
-
 ## Quick start
 1. Clone this repository
 ```bash

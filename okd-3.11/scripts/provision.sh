@@ -106,9 +106,9 @@ echo "Provisioning: Install Docker 1.13"
 # ansible-playbook -vv -i hosts playbooks/prerequisites.yml
 # ansible-playbook -vv -i hosts playbooks/deploy_cluster.yml
 
-docker pull openshift/origin-pod:v3.11
-docker pull openshift/origin-node:v3.11
-docker pull openshift/origin-control-plane:v3.11
+docker pull docker.io/openshift/origin-pod:v3.11
+docker pull docker.io/openshift/origin-node:v3.11
+docker pull docker.io/openshift/origin-control-plane:v3.11
 docker pull quay.io/coreos/etcd:v3.2.28
 docker images
 
